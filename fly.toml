@@ -1,0 +1,23 @@
+app = "ai-accounting-demo"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  OPENROUTER_API_KEY = ""
+
+[[mounts]]
+  source = "data"
+  destination = "/data"
+
+[[services]]
+  internal_port = 8501
+  protocol = "tcp"
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
