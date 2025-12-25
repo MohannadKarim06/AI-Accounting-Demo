@@ -1,23 +1,35 @@
-app = "ai-accounting-demo"
+# fly.toml app configuration file generated for ai-accounting-demo on 2025-12-25T01:05:00+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'ai-accounting-demo'
+primary_region = 'fra'
 
 [build]
-  dockerfile = "Dockerfile"
+  dockerfile = 'Dockerfile'
 
 [env]
-  OPENROUTER_API_KEY = ""
+  OPENROUTER_API_KEY = ''
 
 [[mounts]]
-  source = "data"
-  destination = "/data"
+  source = 'data'
+  destination = '/data'
 
 [[services]]
+  protocol = 'tcp'
   internal_port = 8501
-  protocol = "tcp"
 
   [[services.ports]]
-    handlers = ["http"]
     port = 80
+    handlers = ['http']
 
   [[services.ports]]
-    handlers = ["tls", "http"]
     port = 443
+    handlers = ['tls', 'http']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 1024
